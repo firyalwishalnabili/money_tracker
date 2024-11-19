@@ -18,7 +18,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  // List of expense categories in English
+  // Listnyah
   final List<String> categories = [
     'Food and Beverages',
     'Transportation',
@@ -37,7 +37,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
       titleController.text = widget.transaction!.title;
       amountController.text = widget.transaction!.amount.toString();
       isIncome = widget.transaction!.isIncome;
-      selectedCategory = widget.transaction!.category; // Set category if available
+      selectedCategory = widget.transaction!.category;
     }
     _controller = AnimationController(
       vsync: this,
@@ -68,7 +68,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
       amount: enteredAmount,
       date: DateTime.now(),
       isIncome: isIncome,
-      category: isIncome ? null : selectedCategory, // Only assign category if outcome
+      category: isIncome ? null : selectedCategory,
     );
 
     Navigator.of(context).pop(newTransaction);
@@ -97,46 +97,46 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
             children: [
               SizedBox(height: 16.0),
               Align(
-                alignment: Alignment.center, // Center the TextField
+                alignment: Alignment.center,
                 child: SizedBox(
-                  width: 300, // Set TextField width
+                  width: 300,
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 16.0), // Margin between fields
+                    margin: EdgeInsets.only(bottom: 16.0),
                     child: TextField(
                       controller: titleController,
                       decoration: InputDecoration(
                         labelText: 'Title',
                         prefixIcon: Icon(Icons.description),
                         filled: true,
-                        fillColor: Colors.grey[200], // Background color of TextField
+                        fillColor: Colors.grey[200],
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                          borderRadius: BorderRadius.circular(8.0),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0), // Padding inside TextField
+                        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                       ),
                     ),
                   ),
                 ),
               ),
               Align(
-                alignment: Alignment.center, // Center the TextField
+                alignment: Alignment.center,
                 child: SizedBox(
-                  width: 300, // Set TextField width
+                  width: 300,
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 16.0), // Margin between fields
+                    margin: EdgeInsets.only(bottom: 16.0),
                     child: TextField(
                       controller: amountController,
                       decoration: InputDecoration(
                         labelText: 'Amount',
                         prefixIcon: Icon(Icons.attach_money),
                         filled: true,
-                        fillColor: Colors.grey[200], // Background color of TextField
+                        fillColor: Colors.grey[200],
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                          borderRadius: BorderRadius.circular(8.0),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0), // Padding inside TextField
+                        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                       ),
                     ),
                   ),
@@ -151,23 +151,23 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
                     onChanged: (value) {
                       setState(() {
                         isIncome = value;
-                        selectedCategory = null; // Reset category when income is selected
+                        selectedCategory = null;
                       });
                     },
-                    activeColor: Colors.green, // Color of switch when active
-                    inactiveThumbColor: Colors.red, // Color of thumb when inactive
-                    inactiveTrackColor: Colors.red[200], // Color of track when inactive
+                    activeColor: Colors.green,
+                    inactiveThumbColor: Colors.red,
+                    inactiveTrackColor: Colors.red[200],
                   ),
                   Text("Income"),
                 ],
               ),
-              // Dropdown to select category, only appears if outcome
+              // Dropdown si category
               if (!isIncome) ...[
                 SizedBox(height: 16),
                 Align(
-                  alignment: Alignment.center, // Center the dropdown
+                  alignment: Alignment.center,
                   child: Container(
-                    width: 300, // Set dropdown width
+                    width: 300,
                     margin: EdgeInsets.only(bottom: 16.0),
                     child: DropdownButtonFormField<String>(
                       value: selectedCategory,
@@ -198,15 +198,15 @@ class _AddTransactionPageState extends State<AddTransactionPage> with SingleTick
               ],
               SizedBox(height: 25),
               Align(
-                alignment: Alignment.center, // Center the button
+                alignment: Alignment.center,
                 child: SizedBox(
-                  width: 175, // Set button width
+                  width: 175,
                   child: ElevatedButton(
                     onPressed: _submitData,
                     child: Text(
                       widget.transaction == null ? 'Add Transaction' : 'Update Transaction',
                       style: TextStyle(
-                        fontSize: 14, // Smaller font size
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

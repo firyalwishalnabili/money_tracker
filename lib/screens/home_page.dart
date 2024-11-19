@@ -24,14 +24,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate total and percentage of outcomes by category
     Map<String, double> categoryData = {};
     for (var tx in transactions) {
       if (!tx.isIncome) {
         categoryData[tx.category ?? 'Uncategorized'] =
             (categoryData[tx.category ?? 'Uncategorized'] ?? 0) + tx.amount;
 
-        String formattedDate = '${tx.date.toLocal()}'; // Format tanggal sesuai kebutuhan
+        String formattedDate = '${tx.date.toLocal()}';
       }
     }
 
@@ -40,7 +39,6 @@ class HomePage extends StatelessWidget {
     List<PieChartSectionData> sections = categoryData.entries.map((entry) {
       Color sectionColor;
 
-      // Assign different colors based on the category
       switch (entry.key) {
         case 'Food and Beverages':
           sectionColor = Colors.red;
@@ -67,13 +65,13 @@ class HomePage extends StatelessWidget {
           sectionColor = Colors.grey;
           break;
         default:
-          sectionColor = Colors.black; // Default color for uncategorized
+          sectionColor = Colors.black;
       }
 
       return PieChartSectionData(
         color: sectionColor,
         value: entry.value,
-        title: '', // Empty title to hide text
+        title: '',
         radius: 30,
       );
     }).toList();
@@ -165,7 +163,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            // Text "Outcome Detail :"
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
@@ -177,11 +174,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            // Chart Percentage Outcome
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
-                height: 200, // Height of the chart
+                height: 200,
                 child: totalCategoryOutcome > 0 ? PieChart(
                   PieChartData(
                     sections: sections,
@@ -200,17 +196,16 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            // Color legend for categories
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center, // Pusatkan semua kategori
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: categoryData.entries.map((entry) {
                   double percentage = (entry.value / totalCategoryOutcome) * 100;
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0), // Padding vertikal untuk jarak antar kategori
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center, // Pusatkan setiap kategori
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           width: 20,
@@ -224,7 +219,7 @@ class HomePage extends StatelessWidget {
                           entry.key == 'Investment' ? Colors.amber :
                           entry.key == 'Others' ? Colors.grey : Colors.black,
                         ),
-                        SizedBox(width: 8), // Jarak antara kotak warna dan teks
+                        SizedBox(width: 8),
                         Text(
                           '${entry.key}: ${percentage.toStringAsFixed(1)}%',
                           style: TextStyle(fontSize: 14),
@@ -239,8 +234,8 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                shrinkWrap: true, // Avoid overflow
-                physics: NeverScrollableScrollPhysics(), // Disable scrolling on ListView
+                shrinkWrap: true, // Biar ga overflow
+                physics: NeverScrollableScrollPhysics(), // Biar ga scrolling di ListView
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   final tx = transactions[index];
